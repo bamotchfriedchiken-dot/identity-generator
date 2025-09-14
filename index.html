@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Générateur d’Identité Aléatoire</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+    h1 {
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+    .btn {
+      background: #ff7eb3;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: #ff4d88;
+    }
+    .identity {
+      margin-top: 25px;
+      padding: 20px;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.2);
+      text-align: left;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    .identity strong {
+      color: #ffe082;
+    }
+    footer {
+      margin-top: 20px;
+      font-size: 0.8rem;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔐 Générateur d’Identité Aléatoire</h1>
+    <p>Clique pour générer une identité fictive.</p>
+    <button class="btn" onclick="generateIdentity()">Générer</button>
+    <div class="identity" id="identity">
+      <p><em>Aucune donnée n’a encore été générée.</em></p>
+    </div>
+    <footer>
+      ⚠️ Identités fictives pour tests et démos uniquement.
+    </footer>
+  </div>
+
+  <script>
+    const firstNames = ["Tahirou", "Awa", "Moussa", "Fatou", "Adama", "Salimata", "Kader", "Mariama", "Souleymane", "Nafissatou"];
+    const lastNames = ["Ouédraogo", "Traoré", "Zongo", "Sawadogo", "Sanogo", "Bamba", "Konaté", "Diallo", "Compaoré", "Coulibaly"];
+    const countries = ["Burkina Faso", "Mali", "Côte d’Ivoire", "Sénégal", "Niger", "Ghana", "Togo", "Bénin", "Guinée", "Cameroun"];
+    const jobs = ["Développeur web", "Médecin", "Professeur", "Artiste", "Entrepreneur", "Journaliste", "Designer", "Étudiant", "Photographe", "Avocat"];
+
+    function randomItem(list) {
+      return list[Math.floor(Math.random() * list.length)];
+    }
+
+    function randomDate(start, end) {
+      let d = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+      return d.toISOString().split('T')[0];
+    }
+
+    function generateIdentity() {
+      const identity = {
+        prenom: randomItem(firstNames),
+        nom: randomItem(lastNames),
+        naissance: randomDate(new Date(1970, 0, 1), new Date(2005, 0, 1)),
+        pays: randomItem(countries),
+        profession: randomItem(jobs),
+        email: "user" + Math.floor(Math.random()*10000) + "@example.com"
+      };
+
+      document.getElementById("identity").innerHTML = `
+        <p><strong>Nom :</strong> ${identity.prenom} ${identity.nom}</p>
+        <p><strong>Date de naissance :</strong> ${identity.naissance}</p>
+        <p><strong>Pays :</strong> ${identity.pays}</p>
+        <p><strong>Profession :</strong> ${identity.profession}</p>
+        <p><strong>Email :</strong> ${identity.email}</p>
+      `;
+    }
+  </script>
+</body>
+</html>
